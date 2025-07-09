@@ -11,7 +11,10 @@ const raffleWidget = {
     const widget = document.getElementById('raffle-widget');
     const icon = widget.querySelector('.raffle-icon');
     const joinBtn = widget.querySelector('.raffle-join-btn');
-    const paymentBtn = widget.querySelector('.raffle-payment-btn');
+    const paymentBtn = document.querySelector('.raffle-payment-btn');
+
+    // Initialize Stripe.js with publishable key
+    const stripe = Stripe('pk_test_51RiX7NAQjVZbHvvEwHOIESoY5r7QYD7BkraVqvr9AaV41o5y48oU9M5HkpWUmkLC1LsOcRGPmHm409L3vmDaqwhx00auFVHC8j'); // Replace with your pk_test_ key
 
     icon.addEventListener('click', () => {
       widget.classList.toggle('collapsed');
@@ -27,6 +30,7 @@ const raffleWidget = {
           this.showError('❌ Error, try again.');
         }
       } catch (error) {
+        console.error('Error in POST /api/raffle-entry:', error.message);
         this.showError('❌ Error, try again.');
       }
     });
@@ -37,8 +41,18 @@ const raffleWidget = {
           amount: 100,
           currency: 'usd',
         });
-        window.location.href = `https://checkout.stripe.com/pay/${response.data.sessionId}`;
+        if (!response.data.sessionId) {
+          throw new Error('No sessionId returned from server');
+        }
+        const result = await stripe.redirectToCheckout({
+          sessionId: response.data.sessionId,
+        });
+        if (result.error) {
+          console.error('Stripe redirect error:', result.error.message);
+          this.showError('❌ Payment failed: ' + result.error.message);
+        }
       } catch (error) {
+        console.error('Error in POST /api/create-checkout-session:', error.message);
         this.showError('❌ Payment failed. Please try again.');
       }
     });
@@ -49,6 +63,7 @@ const raffleWidget = {
       const response = await axios.get('/api/raffle-status?userId=123');
       this.updateTicketCount(response.data.tickets);
     } catch (error) {
+      console.error('Error in GET /api/raffle-status:', error.message);
       this.showError('❌ Error, try again.');
     }
   },
@@ -60,12 +75,12 @@ const raffleWidget = {
         const response = await axios.post('/api/stripe-webhook');
         if (response.data.success) {
           this.updateTicketCount(response.data.tickets);
-          // Clear URL params
           window.history.replaceState({}, document.title, window.location.pathname);
         } else {
           this.showError('❌ Payment confirmation failed.');
         }
       } catch (error) {
+        console.error('Error in POST /api/stripe-webhook:', error.message);
         this.showError('❌ Payment confirmation failed.');
       }
     } else if (urlParams.get('success') === 'false') {
