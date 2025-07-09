@@ -4,6 +4,8 @@
   --bg-light: #f7f9fa;
   --text-dark: #222;
   --border-radius: 12px;
+  --primary-color: #800000;
+  --accent-color: #2F4F4F;
 }
 body {
   margin: 0;
@@ -215,41 +217,70 @@ nav a:hover {
   min-height: 40px;
 }
 
-.raffle-widget, .awards-panel, .payments-section {
-  background: #fff;
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  padding: 1.5rem;
-  margin-bottom: 2.5rem;
+.raffle-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: 'Lora', serif;
 }
-.raffle-widget h3, .awards-panel h3, .payments-section h3 {
-  font-family: 'Playfair Display', serif;
-  color: var(--canal-blue);
-  margin-top: 0;
-}
-.raffle-widget .raffle-info {
+
+.raffle-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--primary-color);
+  color: #fff;
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 1rem;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.raffle-widget .raffle-info i {
-  font-size: 2.2rem;
-  color: var(--brick-red);
+
+.raffle-panel {
+  display: none;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--accent-color);
+  animation: slideUp 0.3s ease-in-out;
+  width: 200px;
+  text-align: center;
 }
-.raffle-widget .raffle-btn {
-  background: var(--canal-blue);
+
+.raffle-widget.expanded .raffle-panel {
+  display: block;
+}
+
+.raffle-status {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.raffle-join-btn, .raffle-payment-btn {
+  background: var(--primary-color);
   color: #fff;
   border: none;
-  padding: 0.7rem 2rem;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 4px;
   cursor: pointer;
   font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin: 4px 0;
+  width: 100%;
   transition: background 0.2s;
 }
-.raffle-widget .raffle-btn:hover {
-  background: #00507a;
+
+.raffle-join-btn:hover, .raffle-payment-btn:hover {
+  background: #660000;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 .raffle-progress {
   margin: 1.2rem 0 1.5rem 0;
