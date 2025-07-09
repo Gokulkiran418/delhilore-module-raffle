@@ -1,0 +1,16 @@
+{
+  "name": "delhilore",
+  "version": "1.0.0",
+  "description": "DelhiLore Raffle and Payment Module",
+  "main": "main.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "stripe": "^17.0.0",
+    "axios": "^1.7.7"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
