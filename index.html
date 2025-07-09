@@ -112,34 +112,6 @@
                 <button type="submit"><i class="fa-solid fa-paper-plane"></i> Submit</button>
             </form>
         </section>
-        <section id="raffle" class="raffle-widget">
-            <h3><i class="fa-solid fa-ticket"></i> Raffle Ticket Widget</h3>
-            <div class="raffle-info">
-                <i class="fa-solid fa-gift"></i>
-                <div>
-                    <div>Win exclusive DelhiLore merchandise!</div>
-                    <div style="font-size:0.95rem;color:#888;">Next draw: June 15, 2025</div>
-                </div>
-            </div>
-            <div class="raffle-progress">
-                <div class="progress-label"><i class="fa-solid fa-users"></i> Tickets Left: <span
-                        id="tickets-left">50</span>/50</div>
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" id="progress-bar-fill" style="width:100%"></div>
-                </div>
-            </div>
-            <button class="raffle-btn"><i class="fa-solid fa-ticket"></i> Get Your Ticket</button>
-            <div class="raffle-success-modal" id="raffle-success-modal">
-                <div class="modal-content">
-                    <i class="fa-solid fa-circle-check" style="color:#006BA6;font-size:2rem;"></i>
-                    <div style="margin:1rem 0 0.5rem 0;font-size:1.1rem;">Congratulations!</div>
-                    <div>Your ticket number is <span id="raffle-ticket-number"
-                            style="font-weight:bold;color:#E63946;"></span></div>
-                    <button id="close-modal"
-                        style="margin-top:1.2rem;background:#006BA6;color:#fff;padding:0.5rem 1.5rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;">Close</button>
-                </div>
-            </div>
-        </section>
         <section id="awards" class="awards-panel">
             <h3><i class="fa-solid fa-award"></i> Awards Panel</h3>
             <table class="awards-table">
@@ -240,6 +212,14 @@
             </div>
         </section>
     </div>
+        <div id="raffle-widget" class="raffle-widget collapsed">
+            <div class="raffle-icon">🎟️</div>
+                <div class="raffle-panel">
+                <p class="raffle-status">Loading...</p>
+                <button class="raffle-join-btn">Join the Raffle</button>
+                <button class="raffle-payment-btn">Proceed to Payment</button>
+                </div>
+     </div>
     <footer>
         <div class="footer-links">
             <a href="#stories">Stories</a> |
@@ -253,6 +233,9 @@
             Delhi
         </div>
     </footer>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="raffle-widget.js"></script>
     <script src="main.js"></script>
 </body>
 
