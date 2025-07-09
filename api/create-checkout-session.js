@@ -18,8 +18,8 @@ export default async function handler(req, res) {
           quantity: 1,
         }],
         mode: 'payment',
-        success_url: 'http://localhost:3000/?success=true',
-        cancel_url: 'http://localhost:3000/?success=false',
+        success_url: 'http://delhilore.vercel.app/?success=true',
+        cancel_url: 'http://delhilore.vercel.app/?success=false',
       });
       res.status(200).json({ sessionId: session.id });
     } catch (error) {
