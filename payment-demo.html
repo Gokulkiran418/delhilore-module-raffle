@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raffle Payment Demo - DelhiLore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 style="font-family: 'Playfair Display', serif; color: var(--canal-blue);">Raffle Payment Demo</h1>
+    <p>Click the ticket icon to interact with the raffle widget and test the payment flow.</p>
+    <div id="raffle-widget" class="raffle-widget collapsed">
+      <div class="raffle-icon">🎟️</div>
+      <div class="raffle-panel">
+        <p class="raffle-status">Loading...</p>
+        <button class="raffle-join-btn">Join the Raffle</button>
+        <button class="raffle-payment-btn">Proceed to Payment</button>
+      </div>
+    </div>
+  </div>
+  <script src="raffle-widget.js"></script>
+</body>
+</html>
