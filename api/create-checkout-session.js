@@ -1,4 +1,8 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2024-06-20', // Ensure compatibility with Stripe API version
+});
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -9,16 +13,17 @@ export default async function handler(req, res) {
           price_data: {
             currency: 'usd',
             product_data: { name: 'Raffle Ticket' },
-            unit_amount: 100,
+            unit_amount: 100, // $1.00
           },
           quantity: 1,
         }],
         mode: 'payment',
         success_url: 'http://localhost:3000/?success=true',
-            cancel_url: 'http://localhost:3000/?success=false',
+        cancel_url: 'http://localhost:3000/?success=false',
       });
       res.status(200).json({ sessionId: session.id });
     } catch (error) {
+      console.error('Error creating checkout session:', error.message);
       res.status(500).json({ error: error.message });
     }
   } else {
